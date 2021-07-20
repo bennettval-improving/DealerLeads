@@ -25,21 +25,10 @@ namespace DealerLead.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Guid oid = GetOid();
+            Guid oid = Authenticate.GetOid(this.User);
             var dealerLeadUser = await _context.DealerLeadUser.FirstOrDefaultAsync(x => x.AzureADId.Equals(oid));
+            if (dealerLeadUser == null) return NotFound();
             return View(dealerLeadUser);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create()
-        {
-            var oid = GetOid();
-            if (oid.Equals(Guid.Empty)) return RedirectToAction(nameof(Index));
-
-            _context.Add(new DealerLeadUser { AzureADId = oid });
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         [AllowAnonymous]
@@ -53,18 +42,6 @@ namespace DealerLead.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private Guid GetOid()
-        {
-            var user = this.User;
-            if (user != null && user.Claims != null && user.Claims.Count() > 0)
-            {
-                var oid = user.Claims.FirstOrDefault(x => x.Type.Equals("http://schemas.microsoft.com/identity/claims/objectidentifier")).Value;
-                return Guid.Parse(oid);
-            }
-            else
-                return Guid.Empty;
         }
     }
 }

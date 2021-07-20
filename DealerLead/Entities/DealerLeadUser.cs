@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DealerLead
+namespace DealerLead.Entities
 {
     public class DealerLeadUser
     {

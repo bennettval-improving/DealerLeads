@@ -1,4 +1,4 @@
-﻿@model DealerLead.DealerLeadUser
+﻿@model DealerLead.Entities.DealerLeadUser
 
 <div class="container text-center">
     <div class="row">
@@ -9,21 +9,7 @@
             <br />
         </div>
     </div>
-@if (Model == null)
-{
-    <div class="row">
-        <div class="col">
-            <p>You do not have an account. Please Register. </p>
-            <form method="post" asp-controller="Home" asp-action="Create">
-                <button class="btn btn-primary" type="submit">
-                    Register Account
-                </button>
-            </form>
-        </div>
-    </div>
-}
-else
-{
+
     <div class="row justify-content-center">
         <div class="col-4">
             <div class="text-left">
@@ -36,5 +22,4 @@ else
             </div>
         </div>
     </div>
-}
 </div>

@@ -30,7 +30,13 @@ namespace DealerLead.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+                .AddMicrosoftIdentityWebApp(options =>
+                {
+                    Configuration.Bind("AzureAD", options);
+                    options.Events ??= new OpenIdConnectEvents();
+                    options.Events.OnTokenValidated += Authenticate.OnTokenValidate;
+                });
+
 
             services.AddControllersWithViews(options =>
             {
