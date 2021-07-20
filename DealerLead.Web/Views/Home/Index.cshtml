@@ -1,0 +1,40 @@
+﻿@model DealerLead.DealerLeadUser
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4">Welcome to DealerLead!</h1>
+            <p>DealerLead is the #1 lead tracking app for car dealerships.</p>
+            <br />
+            <br />
+        </div>
+    </div>
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col">
+            <p>You do not have an account. Please Register. </p>
+            <form method="post" asp-controller="Home" asp-action="Create">
+                <button class="btn btn-primary" type="submit">
+                    Register Account
+                </button>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div class="text-left">
+                <p>Things you can do:</p>
+                <ul>
+                    <li><a href="supportedstates">Supported States</a></li>
+                    <li><a href="supportedmakes">Supported Makes</a></li>
+                    <li><a href="supportedmodels">Supported Models</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+</div>
