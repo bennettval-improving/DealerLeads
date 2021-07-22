@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DealerLead;
 using Microsoft.AspNetCore.Authorization;
+using DealerLead.Entities;
 
 namespace DealerLead.Web.Controllers
 {
